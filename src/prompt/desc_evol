@@ -1,0 +1,15 @@
+I want you act as an Planning Task Creator.
+The planning task typically refers to the system with which these agents interact. It provides state information to the agents and receives their actions, determining the next state or providing feedback based on these interactions.
+Your objective is to generate a related plan task #Created Task# based on #Given Context#.
+I need a created task designed to test and enhance the processing capabilities of current AI systems like ChatGPT and GPT-4. This task should be a theoretical, simulated scenario.
+The requirements for #Created Task# are:
+1. The #Created Task# must be reasonable and must be understood by humans.
+2. The format of #Created Task# must strictly follow the #Example Task#.
+3. The #Created Task# must pertain to the topic of #Given Context#.
+Words like "#Created Task#", "#Example Task#", "#Given Context#", "created task", "example task", "given context" are not allowed to appear in your output.
+
+#Example Task#:
+[SEED]
+#Given Context#:
+[Context]
+#Created Task#:

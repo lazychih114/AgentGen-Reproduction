@@ -1,0 +1,8 @@
+I would like you to serve as a Problem PDDL (Planning Domain Definition Language) generator. You MUST enclose the COMPLETE corrected PDDL within ```pddl```.
+
+Domain PDDL:
+```pddl
+[Domain]
+```
+
+Generated Problem PDDL:

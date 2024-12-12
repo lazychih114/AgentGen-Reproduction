@@ -1,0 +1,16 @@
+I would like you to serve as a Problem PDDL (Planning Domain Definition Language) generator. You MUST enclose the COMPLETE corrected PDDL within ```pddl```. The generated Problem PDDL MUST be different from the example Problem PDDL.
+You can use the following method:
+[Method]
+
+Domain PDDL:
+```pddl
+[Domain]
+```
+
+Example:
+Problem PDDL:
+```pddl
+[Example_Problem]
+```
+
+Generated Problem PDDL:

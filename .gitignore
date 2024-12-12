@@ -1,0 +1,13 @@
+# API Keys
+src/key.txt
+
+# macOS system files
+.DS_Store
+src/.DS_Store
+
+# Temporary PDDL files
+temp.pddl
+src/temp.pddl
+src/utils/temp_pddl/
+
+pddlgym_planners/

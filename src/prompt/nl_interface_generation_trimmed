@@ -1,0 +1,84 @@
+I would like you to create natural language interface for PDDL.
+The form of the Natural Language Interface is a Python dictionary, wherein：
+1. The key corresponds to the name of a predicate or action within the domain PDDL. 
+2. The value is its equivalent in natural language, with parameters presented in "{argn}", where n is the index of its parameters in the PDDL expression.
+3. You must ensure that the number of "{}" corresponds precisely to the number of parameters in predicates or actions. 
+3. You should very carefully check the order of {argn}.
+Your output must strictly follow the provided example.
+
+
+Example:
+PDDL Domain:
+```pddl
+(define (domain spanner)                    
+(:requirements :typing :strips)                
+(:types 
+	location locatable - object
+	man nut spanner - locatable	
+)                                           
+                                                                               
+(:predicates 
+	(at ?m - locatable ?l - location)
+	(carrying ?m - man ?s - spanner)
+	(useable ?s - spanner)
+	(link ?l1 - location ?l2 - location)
+	(tightened ?n - nut)
+	(loose ?n - nut))                                                                                           
+
+(:action walk 
+        :parameters (?start - location ?end - location ?m - man)
+        :precondition (and (at ?m ?start) 
+                           (link ?start ?end))                                                          
+        :effect (and (not (at ?m ?start)) (at ?m ?end)))
+
+(:action pickup_spanner 
+        :parameters (?l - location ?s - spanner ?m - man)
+        :precondition (and (at ?m ?l) 
+                           (at ?s ?l))
+        :effect (and (not (at ?s ?l))
+                     (carrying ?m ?s)))
+
+(:action tighten_nut 
+        :parameters (?l - location ?s - spanner ?m - man ?n - nut)
+        :precondition (and (at ?m ?l) 
+		      	   (at ?n ?l)
+			   (carrying ?m ?s)
+			   (useable ?s)
+			   (loose ?n))
+        :effect (and (not (loose ?n))(not (useable ?s)) (tightened ?n)))
+)
+```
+Description:
+You are a maintenance worker tasked with tightening loose nuts in various locations using a spanner. Your environment consists of different locations, a spanner, and nuts that need to be tightened. The spanner can be carried from one location to another, and it is used to tighten nuts. However, once a nut is tightened, the spanner becomes unusable for the rest of the task.
+
+The actions defined in this domain include:
+- walk <start_location> <end_location> <man>: This action allows the man to move from one location to another if there is a link between the start location and the end location. The effect of this action is that the man is no longer at the start location but is now at the end location.
+- pickup_spanner <location> <spanner> <man>: This action allows the man to pick up a spanner at his current location. The precondition for this action is that both the man and the spanner are at the same location. The effect of this action is that the spanner is no longer at that location, and the man is now carrying the spanner.
+- tighten_nut <location> <spanner> <man> <nut>: This action allows the man to tighten a loose nut at his current location using a spanner he is carrying. The preconditions for this action are that the man, the nut, and the spanner are all at the same location, the spanner is usable, and the nut is loose. The effect of this action is that the nut is no longer loose but tightened, and the spanner becomes unusable.
+
+You have the following restrictions on your actions:
+- You can only move from one location to another if there is a direct link between those locations.
+- You can only pick up a spanner if you are at the same location as the spanner.
+- You can only tighten a nut if you are at the same location as the nut, you are carrying a usable spanner, and the nut is loose. After tightening a nut, the spanner becomes unusable for the rest of the task.
+Natural Language Interface:
+```python
+{
+    "at": "{arg1} is at {arg2}.",
+    "carrying": "{arg1} is carrying {arg2}.",
+    "useable": "{arg1} is useable.",
+    "link": "There is a link between {arg1} and {arg2}.",
+    "tightened": "{arg1} is tightened.",
+    "loose": "{arg1} is loose.",
+    "walk": "{arg3} walks from {arg1} to {arg2}.",
+    "pickup_spanner": "{arg3} picks up the spanner {arg2} at {arg1}.",
+    "tighten_nut": "{arg3} tightens the nut {arg4} at {arg1} with the spanner {arg2}."
+}
+```
+
+You need to generate the corresponding natural language interface for the following pddl domain.
+    
+PDDL Domain:
+[PDDL_Domain]
+Description:
+[PDDL_Description]
+Natural Language Interface:
